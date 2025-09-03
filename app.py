@@ -57,4 +57,5 @@ def redirect_to_url(short_code):
         return render_template("index.html", error="Invalid or expired short URL")
 
 if __name__ == "__main__":
-    app.run(debug=False,use_reloader=False)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False, use_reloader=False)
