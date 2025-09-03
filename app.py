@@ -43,7 +43,7 @@ def shorten():
         "expiry": expiry_time
     })
 
-    short_url = f"http://localhost:5000/{short_code}"
+    short_url = f"https:/url-shorten.up.railway.app/{short_code}"
     expiry_str = expiry_time.strftime("%Y-%m-%d %H:%M:%S UTC")
 
     return render_template("index.html", short_url=short_url, expiry=expiry_str)
