@@ -2,19 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>URL Shortener</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      max-width: 600px;
+      margin-top: 80px;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin-bottom: 30px;
+      text-align: center;
+      color: #0d6efd;
+    }
+    .short-url {
+      font-weight: bold;
+    }
+    .expiry {
+      font-style: italic;
+      color: #6c757d;
+    }
+  </style>
 </head>
 <body>
-  <h1>URL Shortener</h1>
-  <form method="POST" action="/shorten">
-    <input type="text" name="url" placeholder="Enter your URL" required>
-    <button type="submit">Shorten</button>
-  </form>
-  {% if short_url %}
-    <p>Your shortened URL: 
-      <a href="{{ short_url }}" target="_blank">{{ short_url }}</a>
-    </p>
-    <p>Expires at: {{ expiry }}</p>
-  {% endif %}
+  <div class="container">
+    <h1>URL Shortener</h1>
+
+    {% if error %}
+      <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="/shorten" class="mb-3">
+      <div class="input-group">
+        <input type="url" name="url" class="form-control" placeholder="Enter your URL" required>
+        <button type="submit" class="btn btn-primary">Shorten</button>
+      </div>
+    </form>
+
+    {% if short_url %}
+      <div class="alert alert-success">
+        <p>Your shortened URL: 
+          <a href="{{ short_url }}" target="_blank" class="short-url">{{ short_url }}</a>
+        </p>
+        <p class="expiry">Expires at: {{ expiry }}</p>
+      </div>
+    {% endif %}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
